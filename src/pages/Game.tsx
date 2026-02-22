@@ -11,7 +11,6 @@ interface Props {
 export default function Game({ category, goBack }: Props) {
   const modules = getAllImages()
 
-  const [player, setPlayer] = useState(1)
   const [images, setImages] = useState<string[]>([])
   const [flipped, setFlipped] = useState<boolean[]>([])
   const [target, setTarget] = useState(0)
@@ -22,13 +21,6 @@ export default function Game({ category, goBack }: Props) {
     setImages(imgs)
     setFlipped(new Array(imgs.length).fill(false))
   }, [category])
-
-  useEffect(() => {
-    if (images.length) {
-      setTarget(Math.floor(Math.random() * images.length))
-      setTargetFlip(false)
-    }
-  }, [images, player])
 
   function toggle(i: number) {
     const copy = [...flipped]
@@ -49,9 +41,7 @@ export default function Game({ category, goBack }: Props) {
 
   return (
     <div className="game">
-      <Controls player={player} setPlayer={setPlayer} reset={reset} goBack={goBack} />
-
-  
+      <Controls reset={reset} goBack={goBack} />
 
       <Grid images={images} flipped={flipped} onToggle={toggle} />
 
