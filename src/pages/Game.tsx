@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Grid from '../components/Grid'
-import PlayerToggle from '../components/PlayerToggle'
+import Controls from '../components/Controls'
 import { getAllImages, getImagesForCategory } from '../utils/getImages'
 
 interface Props {
@@ -49,11 +49,13 @@ export default function Game({ category, goBack }: Props) {
 
   return (
     <div className="game">
-      <PlayerToggle player={player} setPlayer={setPlayer} />
+      <Controls player={player} setPlayer={setPlayer} reset={reset} goBack={goBack} />
+
+  
 
       <Grid images={images} flipped={flipped} onToggle={toggle} />
 
-      <div className="target">
+      <div className="target" style={{width: "25%", display: "flex", alignItems: "center", justifyContent: "center"}} >
         {targetImg && (
           <div className={`card ${targetFlip ? 'flipped' : ''}`} onClick={() => setTargetFlip(!targetFlip)}>
             <div className="card-inner">
@@ -65,11 +67,6 @@ export default function Game({ category, goBack }: Props) {
             </div>
           </div>
         )}
-      </div>
-
-      <div className="controls">
-        <button onClick={reset}>Reset</button>
-        <button onClick={goBack}>Back</button>
       </div>
     </div>
   )
