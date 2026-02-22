@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  background: #1e1e1e;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.menu button, .controls button {
+  padding: 10px 16px;
+  margin: 8px;
+  background: #444;
+  border: none;
+  border-radius: 6px;
+  color: white;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 8px;
+  padding: 10px;
+}
+
+.card {
+  width: 100%;
+  aspect-ratio: 3/4;
+  perspective: 800px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 8px;
+}
+
+.card-front img {
+  width: 100%;
+  height: 75%;
+  object-fit: cover;
+}
+
+.card-back {
+  background: #111;
+  transform: rotateY(180deg);
+}
+
+.target {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.player-toggle button.active {
+  background: #888;
+}
