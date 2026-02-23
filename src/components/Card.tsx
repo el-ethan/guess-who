@@ -6,7 +6,14 @@ interface Props {
 }
 
 export default function Card({ image, label, flipped, onClick }: Props) {
-  const displayLabel = label.split('-')[0]
+  const displayLabel = (() => {
+    const raw = label ?? ''
+    try {
+      return decodeURIComponent(raw).split('-')[0]
+    } catch (e) {
+      return raw.split('-')[0]
+    }
+  })()
   return (
     <div className={`card ${flipped ? 'flipped' : ''}`} onClick={onClick}>
       <div className="card-inner">

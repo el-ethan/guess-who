@@ -37,7 +37,14 @@ export default function Game({ category, goBack }: Props) {
   }
 
   const targetImg = images[target]
-  const label = targetImg?.split('/').pop()?.split('.')[0] ?? ''
+  const label = (() => {
+    const raw = targetImg?.split('/').pop()?.split('.')[0] ?? ''
+    try {
+      return decodeURIComponent(raw).split('-')[0]
+    } catch (e) {
+      return raw.split('-')[0] ?? ''
+    }
+  })()
 
   return (
     <div className="game">
@@ -51,9 +58,10 @@ export default function Game({ category, goBack }: Props) {
             <div className="card-inner">
               <div className="card-front">
                 <img src={targetImg} />
+              </div>
+              <div className="card-back">
                 <span>{label}</span>
               </div>
-              <div className="card-back" />
             </div>
           </div>
         )}
