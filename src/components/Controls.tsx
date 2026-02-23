@@ -5,7 +5,7 @@ interface Props {
 
 export default function Controls({ reset, goBack }: Props) {
   return (
-    <div className="player-toggle">
+    <div className="controls">
       <button onClick={reset}>Reset</button>
       <button onClick={goBack}>Back</button>
     </div>
