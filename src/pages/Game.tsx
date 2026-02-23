@@ -20,6 +20,12 @@ export default function Game({ category, goBack }: Props) {
     const imgs = getImagesForCategory(modules, category)
     setImages(imgs)
     setFlipped(new Array(imgs.length).fill(false))
+    if (imgs.length) {
+      setTarget(Math.floor(Math.random() * imgs.length))
+    } else {
+      setTarget(0)
+    }
+    setTargetFlip(false)
   }, [category])
 
   function toggle(i: number) {
