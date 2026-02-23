@@ -1,4 +1,4 @@
-import { getAllImages, getCategories } from '../utils/getImages'
+import { getAllImages, getCategories, getImagesForCategory } from '../utils/getImages'
 
 interface Props {
   onSelect: (c: string) => void
@@ -12,23 +12,43 @@ export default function CategorySelect({ onSelect }: Props) {
   return (
     <div className="menu">
       <h1>Guess Who</h1>
-      {categories.map(c => {
-        const label = c.replace(/_restricted$/, '').replace(/-/g, ' ')
-        const handleClick = () => {
-          if (c.endsWith('_restricted')) {
-            const ok = confirm('this category may contain scary images. Do you want to continue')
-            if (ok) onSelect(c)
-          } else {
-            onSelect(c)
-          }
-        }
+      <div className="category-grid">
+        {categories.map(c => {
+          const label = c.replace(/_restricted$/, '').replace(/-/g, ' ')
+          const images = getImagesForCategory(modules, c)
+          const bg = images && images.length ? images[0] : ''
 
-        return (
-          <button key={c} onClick={handleClick}>
-            {label}
-          </button>
-        )
-      })}
+          const handleClick = () => {
+            if (c.endsWith('_restricted')) {
+              const ok = confirm('this category may contain scary images. Do you want to continue')
+              if (ok) onSelect(c)
+            } else {
+              onSelect(c)
+            }
+          }
+
+          const handleKey = (e: React.KeyboardEvent) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              handleClick()
+            }
+          }
+
+          return (
+            <div
+              key={c}
+              role="button"
+              tabIndex={0}
+              className="category-card"
+              onClick={handleClick}
+              onKeyDown={handleKey}
+              style={{ backgroundImage: bg ? `url(${bg})` : undefined }}
+            >
+              <div className="category-label">{label}</div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

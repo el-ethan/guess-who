@@ -18,6 +18,61 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Category select grid/cards */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.category-card {
+  position: relative;
+  height: 220px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.category-card:focus {
+  outline: 3px solid rgba(255,255,255,0.12);
+  outline-offset: 2px;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.55);
+}
+
+.category-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.5) 100%);
+  transition: background 0.18s ease;
+}
+
+.category-label {
+  position: relative;
+  z-index: 1;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.28);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
 .menu button:hover, .controls button:hover {
   background: #5A5E71;
   transform: translateY(-2px);

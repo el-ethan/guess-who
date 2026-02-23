@@ -1,5 +1,5 @@
 export function getAllImages() {
-  const modules = import.meta.glob('/public/characters/**/*.{png,jpg,jpeg,webp}', {
+  const modules = import.meta.glob('/public/characters/**/*.{png,jpg,jpeg,webp,avif,gif,svg}', {
     eager: true,
     as: 'url',
   }) as Record<string, string>
